@@ -14,5 +14,5 @@ interface CadastrarClienteRepository
      * @return CadastrarClienteOutputData|null
      * @throws ClienteComEmailJaExistenteException
      */
-    public function execute(string $nome, string $email, string $password): ?CadastrarClienteOutputData;
+    public function execute(string $nome, string $email, string $password): CadastrarClienteOutputData;
 }
