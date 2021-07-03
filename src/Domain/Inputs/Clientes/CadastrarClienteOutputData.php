@@ -11,7 +11,7 @@ class CadastrarClienteOutputData
         $this->clienteId = $clienteId;
     }
 
-    public function get(): int
+    public function getId(): int
     {
         return $this->clienteId;
     }
