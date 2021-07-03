@@ -17,10 +17,7 @@ class CadastrarCliente implements CadastrarClienteService
      * @throws ClienteComEmailJaExistenteException
      * @throws ErroAoCadastrarClienteException
      */
-    public function __invoke(
-        CadastrarClienteRepository $repository,
-        CadastrarClienteInputData $cliente
-    ): CadastrarClienteOutputData
+    public function __invoke(CadastrarClienteRepository $repository, CadastrarClienteInputData $cliente): CadastrarClienteOutputData
     {
         $data = $cliente->all();
         if ($outputData = $repository->execute($data)) {
