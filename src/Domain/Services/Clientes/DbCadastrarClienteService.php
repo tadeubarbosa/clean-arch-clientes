@@ -8,7 +8,7 @@ use App\Domain\Inputs\Clientes\CadastrarClienteInputData;
 use App\Domain\Inputs\Clientes\CadastrarClienteOutputData;
 use App\Domain\Repositories\Clientes\CadastrarClienteRepository;
 
-class CadastrarCliente implements CadastrarClienteService
+class DbCadastrarClienteService implements CadastrarClienteService
 {
     /**
      * @param CadastrarClienteRepository $repository
@@ -19,8 +19,7 @@ class CadastrarCliente implements CadastrarClienteService
      */
     public function __invoke(CadastrarClienteRepository $repository, CadastrarClienteInputData $cliente): CadastrarClienteOutputData
     {
-        $data = $cliente->all();
-        if ($outputData = $repository->execute($data)) {
+        if ($outputData = $repository->execute($cliente)) {
             return $outputData;
         }
         $message = 'Algo deu errado ao cadastrar o cliente! Tente novamente mais tarde!';

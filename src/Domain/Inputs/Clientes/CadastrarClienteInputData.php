@@ -2,31 +2,41 @@
 
 namespace App\Domain\Inputs\Clientes;
 
-use App\Domain\Exceptions\Shared\InvalidEmailException;
-use App\Domain\Exceptions\Shared\InvalidNomeException;
-use App\Domain\Exceptions\Shared\InvalidPasswordException;
-
-class CadastrarClienteInputData
+final class CadastrarClienteInputData
 {
-    private Cliente $cliente;
+    private string $nome;
+    private string $email;
+    private string $password;
 
-    /**
-     * @throws InvalidEmailException
-     * @throws InvalidPasswordException
-     * @throws InvalidNomeException
-     */
     public function __construct(string $nome, string $email, string $password)
     {
-        $this->cliente = new Cliente($nome, $email, $password);
+        $this->nome = $nome;
+        $this->email = $email;
+        $this->password = $password;
     }
 
-    public function all(): array
+    /**
+     * @return string
+     */
+    public function getNome(): string
     {
-        return [
-            'nome' => (string) $this->cliente->getNome(),
-            'email' => (string) $this->cliente->getEmail(),
-            'password' => (string) $this->cliente->getPassword(),
-        ];
+        return $this->nome;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 
 }

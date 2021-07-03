@@ -2,6 +2,7 @@
 
 namespace App\Infra\Repositories\Clientes;
 
+use App\Domain\Inputs\Clientes\CadastrarClienteInputData;
 use App\Domain\Inputs\Clientes\CadastrarClienteOutputData;
 use App\Domain\Repositories\Clientes\CadastrarClienteRepository;
 use App\Infra\Exceptions\PDO\ErroAoInserirValorNoBancoException;
@@ -17,16 +18,19 @@ class PdoCadastrarClienteRepository implements CadastrarClienteRepository
     }
 
     /**
-     * @param string $nome
-     * @param string $email
-     * @param string $password
+     * @param CadastrarClienteInputData $cliente
      * @return CadastrarClienteOutputData|null
      * @throws ErroAoInserirValorNoBancoException
      */
-    public function execute(string $nome, string $email, string $password): CadastrarClienteOutputData
+    public function execute(CadastrarClienteInputData $cliente): CadastrarClienteOutputData
     {
+        $params = [
+            'nome' => $cliente->getNome(),
+            'email' => $cliente->getEmail(),
+            'password' => $cliente->getPassword(),
+        ];
         $stmt = $this->pdo->prepare('INSERT INTO `clientes` (`nome`, `email`, `password`) VALUES (?, ?, ?)');
-        if (!$stmt->execute([$nome, $email, $password])) {
+        if (!$stmt->execute($params)) {
             throw new ErroAoInserirValorNoBancoException($stmt->errorInfo());
         }
         $lastInsertId = $stmt->lastInsertId();

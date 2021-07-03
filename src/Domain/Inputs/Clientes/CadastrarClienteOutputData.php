@@ -2,7 +2,7 @@
 
 namespace App\Domain\Inputs\Clientes;
 
-class CadastrarClienteOutputData
+final class CadastrarClienteOutputData
 {
     private int $clienteId;
 
